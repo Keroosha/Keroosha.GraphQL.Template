@@ -1,0 +1,28 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "Blob": {
+    "Type": "Local",
+    "Local": {
+      "Path": "/tmp"
+    }
+  },
+  "Email": {
+    
+  },
+  "AllowedHosts": "*",
+  "Database": {
+    "ConnectionString": "Server=127.0.0.1;User id=postgres;password=postgres;database=app"
+  },
+  "TokenStorage": {
+    "Type": "JWT",
+    "JWT": {
+      "Key": "b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAaAAAABNlY2RzYS1zaGEyLW5pc3RwMjU2AAAACG5pc3RwMjU2AAAAQQT6ZlmRruRoH6E2LSDMbNpoO2/vssQHTpQgbrIJhvsWGTjKKYKwFpLMN76xsGCP2FocNGBwTJ646wtbhvLplViPAAAAsIAy+e2AMvntAAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBPpmWZGu5GgfoTYtIMxs2mg7b++yxAdOlCBusgmG+xYZOMopgrAWksw3vrGwYI/YWhw0YHBMnrjrC1uG8umVWI8AAAAgfXroVS5eSvR8rSzvZDM24uATE23HhjzAUJXMcA4zJo0AAAAUa2Vyb29zaGFAa2Vyb29zaGEtcGMBAgME"
+    }
+  }
+}

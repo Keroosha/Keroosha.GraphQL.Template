@@ -1,0 +1,15 @@
+@model Keroosha.GraphQL.Web.ViewModels.EmailConfirmTemplateViewModel
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <title>@Model.Caption</title>
+</head>
+<body>
+<div>@Model.Caption</div>
+<div>
+    <a href="@Model.RedirectUrl?code=@Model.ConfirmationsCode" target="_blank">
+        @Model.RedirectUrl?code=@Model.ConfirmationsCode
+    </a>
+</div>
+</body>
+</html>

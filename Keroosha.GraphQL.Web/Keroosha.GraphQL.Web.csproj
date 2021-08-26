@@ -1,0 +1,52 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="webapp\package-lock.json" />
+        <Content Include="webapp\package-lock.json" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="linq2db.PostgreSQL" Version="3.2.0" />
+        <PackageReference Include="Nito.AsyncEx" Version="5.1.0" />
+        <PackageReference Include="Serenity.FluentMigrator" Version="1.6.904" />
+        <PackageReference Include="Serenity.FluentMigrator.Runner" Version="1.6.904" />
+        <PackageReference Include="SkiaSharp" Version="2.80.2" />
+        <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="2.80.2" />
+        <PackageReference Include="MailKit" Version="2.10.0" />
+
+        <PackageReference Include="Microsoft.Identity.Web" Version="1.0.0" />
+        <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.0.0" />
+        <PackageReference Include="Microsoft.Identity.Web.MicrosoftGraph" Version="1.0.0" />
+
+        <PackageReference Include="JWT" Version="7.3.1" />
+
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.7.0" />
+        <PackageReference Include="CommandLineParser" Version="2.8.0" />
+        <PackageReference Include="HotChocolate.AspNetCore" Version="12.0.0-preview.34" />
+        <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="12.0.0-preview.34" />
+        <PackageReference Include="Mapster" Version="7.2.0" />
+    </ItemGroup>
+
+    <ItemGroup Condition="$(IncludeWeb) == 'true'">
+        <None Remove="webapp\build\**\*.*" />
+        <Content Include="webapp\build\**\*.*" Link="wwwroot\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="Never" CopyToPublishDirectory="PreserveNewest" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Remove="webapp\build\**" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Remove="$(NuGetPackageRoot)linq2db.postgresql/**/*.*" />
+        <Content Remove="webapp/**/*.*" />
+        <None Include="config.local.*" />
+        <None Remove="webapp\build\**" />
+        <Content Remove="webapp\build\**" />
+        <EmbeddedResource Remove="webapp\build\**" />
+    </ItemGroup>
+
+</Project>
