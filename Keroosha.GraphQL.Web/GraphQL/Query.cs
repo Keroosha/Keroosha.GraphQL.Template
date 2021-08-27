@@ -21,7 +21,7 @@ namespace Keroosha.GraphQL.Web.GraphQL
             return res.Success ? res.Value.token : "hui";
         }
 
-        [Authorize]
+        [Authorize(Roles = new []{ "Admin" })]
         public string Test(ClaimsPrincipal claims)
         {
             return "ok";

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Keroosha.GraphQL.Web.Application;
 using Keroosha.GraphQL.Web.Auth;
 using Keroosha.GraphQL.Web.Config;
 using Keroosha.GraphQL.Web.Database;
@@ -35,8 +36,8 @@ namespace Keroosha.GraphQL.Web
                 .AddAuthorization()
                 .AddQueryType<Query>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer();
+            services.AddAuthentication("Token")
+                .AddScheme<TokenAuthenticationOptions, TokenAuthenticationHandler>("Token", op => { });
 
             var blobType = new BlobConfig();
             _configuration.GetSection("Blob").Bind(blobType);
@@ -73,8 +74,8 @@ namespace Keroosha.GraphQL.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
-            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGraphQL();
