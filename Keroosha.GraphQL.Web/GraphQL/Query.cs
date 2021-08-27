@@ -1,20 +1,14 @@
+using System.Linq;
 using System.Security.Claims;
 using HotChocolate;
 using HotChocolate.AspNetCore.Authorization;
 using Keroosha.GraphQL.Web.Auth;
-using Keroosha.GraphQL.Web.Dto;
 using Mapster;
 
 namespace Keroosha.GraphQL.Web.GraphQL
 {
     public class Query
     {
-        public UserProfileDto Me([Service] UserAuthManager authManager, string login, string password)
-        {
-            var res = authManager.Login(login, password);
-            return res.Success ? res.Value.user.Adapt<UserProfileDto>() : new UserProfileDto();
-        }
-        
         public string Token([Service] UserAuthManager authManager, string login, string password)
         {
             var res = authManager.Login(login, password);
@@ -22,9 +16,10 @@ namespace Keroosha.GraphQL.Web.GraphQL
         }
 
         [Authorize(Roles = new []{ "Admin" })]
-        public string Test(ClaimsPrincipal claims)
+        public AdminQL Admin(ClaimsPrincipal claims, [Service] UserAuthManager authManager)
         {
-            return "ok";
+            var (user, _) = authManager.Auth(claims.Claims.First(x => x.Type == "Token").Value).Value;
+            return user.Adapt<AdminQL>();
         }
     }
 }
